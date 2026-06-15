@@ -1,4 +1,4 @@
-# ProjectFlow — Version Simplifiée (Sans API séparée)
+# Blog de Thenelle - Artiste Gospel
 
 ## Structure du projet
 
@@ -56,7 +56,7 @@ cd C:\Users\VotreNom\Downloads\projectflow-simple
 cd /home/votreNom/Downloads/projectflow-simple
 ```
 
-> ⚠️ TOUTES les commandes suivantes se font dans ce dossier.
+>  TOUTES les commandes suivantes se font dans ce dossier.
 
 Vérifiez que vous êtes au bon endroit avec :
 ```
@@ -151,16 +151,3 @@ cd projectflow-simple
 venv\Scripts\activate    (Windows) ou source venv/bin/activate (Mac/Linux)
 python app.py
 ```
-
----
-
-## DIFFÉRENCES AVEC LA VERSION API
-
-| Aspect | Version API (Flask+MySQL) | Cette version (Simple) |
-|--------|--------------------------|----------------------|
-| Base de données | MySQL (serveur externe) | SQLite (fichier local) |
-| Communication | Frontend JS → API REST | Formulaires HTML → Flask |
-| Fichiers | 28 fichiers séparés | 1 app.py + templates |
-| Installation | MySQL requis | Rien d'autre que Python |
-| Lancement | 2 terminaux | 1 terminal |
-| Fichier DB | basedonnee.db (SQLite) | basedonnee.db (SQLite) |
