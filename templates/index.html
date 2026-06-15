@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THENELLA - Gospel Artist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">THEN<span>ELLA</span></a>
+                
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+                
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#home" data-lang-en="Home" data-lang-fr="Accueil">Home</a></li>
+                    <li><a href="#biography" data-lang-en="Biography" data-lang-fr="Biographie">Biography</a></li>
+                    <li><a href="#achievements" data-lang-en="Achievements" data-lang-fr="Réalisations">Achievements</a></li>
+                    <li><a href="#music" data-lang-en="Music" data-lang-fr="Musique">Music</a></li>
+                    <li><a href="#media" data-lang-en="Gallery" data-lang-fr="Galerie">Gallery</a></li>
+                    <li><a href="#accounts" data-lang-en="Accounts" data-lang-fr="Comptes">Accounts</a></li>
+                    <li><a href="#contact" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
+                    
+                    <div class="language-switcher">
+                        <button class="lang-btn active" id="lang-en">EN</button>
+                        <button class="lang-btn" id="lang-fr">FR</button>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 data-lang-en="THENELLA" data-lang-fr="THENELLA">{{ artist.name if artist else 'THENELLA' }}</h1>
+            <p data-lang-en="Cameroonian Gospel Artist · Evangelist · Worship Leader" data-lang-fr="Artiste Gospel Camerounaise · Évangéliste · Leader de Louange">Cameroonian Gospel Artist · Evangelist · Worship Leader</p>
+            <p data-lang-en="Ministering through music that transforms hearts and glorifies God" data-lang-fr="Ministère par la musique qui transforme les cœurs et glorifie Dieu">Ministering through music that transforms hearts and glorifies God</p>
+            <div class="hero-btns">
+                <a href="#music" class="btn" data-lang-en="Listen to Music" data-lang-fr="Écouter la Musique">Listen to Music</a>
+                <a href="#contact" class="btn btn-outline" data-lang-en="Book for Ministry" data-lang-fr="Réserver pour le Ministère">Book for Ministry</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="biography" id="biography">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang-en="Her Story" data-lang-fr="Son Histoire">Her Story</h2>
+            </div>
+            
+            <div class="bio-content">
+                <div class="bio-img">
+                    <img src="{{ url_for('static', filename='images/' + (artist.image_url if artist else 'OIP.webp')) }}" alt="THENELLA">
+                </div>
+                
+                <div class="bio-text">
+                    <h3 data-lang-en="{{ artist.full_name if artist else 'Bonog Thérèse Ornella' }}" data-lang-fr="{{ artist.full_name if artist else 'Bonog Thérèse Ornella' }}">{{ artist.full_name if artist else 'Bonog Thérèse Ornella' }}</h3>
+                    <p data-lang-en="{{ artist.bio_en if artist else '' }}" data-lang-fr="{{ artist.bio_fr if artist else '' }}">
+                        {{ artist.bio_en if artist else 'Thenella, born Bonog Thérèse Ornella, is a Cameroonian gospel singer, songwriter, worship leader, and evangelist.' }}
+                    </p>
+                    <p data-lang-en="{{ artist.bio2_en if artist else '' }}" data-lang-fr="{{ artist.bio2_fr if artist else '' }}">
+                        {{ artist.bio2_en if artist else 'For years, she served as lead vocalist and choir director at various churches...' }}
+                    </p>
+                    <p data-lang-en="{{ artist.bio3_en if artist else '' }}" data-lang-fr="{{ artist.bio3_fr if artist else '' }}">
+                        {{ artist.bio3_en if artist else 'Married to Dr. Philippe Totto Ndong, Thenella continues to minister...' }}
+                    </p>
+                    <a href="#achievements" class="btn" data-lang-en="See Her Achievements" data-lang-fr="Voir Ses Réalisations">See Her Achievements</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="achievements" id="achievements">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang-en="Achievements & Awards" data-lang-fr="Réalisations & Récompenses">Achievements & Awards</h2>
+            </div>
+            
+            <div class="achievements-grid">
+                {% for achievement in achievements %}
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas {{ achievement.icon }}"></i>
+                    </div>
+                    <h3 data-lang-en="{{ achievement.title_en }}" data-lang-fr="{{ achievement.title_fr }}">{{ achievement.title_en }}</h3>
+                    <p data-lang-en="{{ achievement.description_en }}" data-lang-fr="{{ achievement.description_fr }}">{{ achievement.description_en }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="music" id="music">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang-en="Discography" data-lang-fr="Discographie">Discography</h2>
+            </div>
+            
+            <div class="music-grid">
+                {% for album in albums %}
+                <div class="music-card" data-video-url="{{ album.listen_url }}">
+                    <div class="music-img">
+                        <img src="{{ url_for('static', filename='images/' + album.image_url) }}" alt="{{ album.title }}">
+                    </div>
+                    <div class="music-info">
+                        <h3>{{ album.title }}</h3>
+                        <p data-lang-en="{{ album.description_en }}" data-lang-fr="{{ album.description_fr }}">{{ album.description_en }}</p>
+                        <a href="{{ album.listen_url }}" target="_blank" class="btn" data-lang-en="Listen Now" data-lang-fr="Écouter Maintenant">Listen Now</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="media" id="media">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang-en="Gallery" data-lang-fr="Galerie">Gallery</h2>
+            </div>
+            
+            <div class="media-slider">
+                <div class="slider-container" id="slider-container">
+                    {% for image in gallery_images %}
+                    <div class="slide">
+                        <img src="{{ url_for('static', filename='images/' + image.image_url) }}" alt="{{ image.title_en }}">
+                        <div class="slide-caption">
+                            <h3 data-lang-en="{{ image.title_en }}" data-lang-fr="{{ image.title_fr }}">{{ image.title_en }}</h3>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="slider-controls">
+                    <button class="slider-btn" id="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-btn" id="next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="accounts" id="accounts">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang-en="Social Media & Music" data-lang-fr="Réseaux Sociaux & Musique">Social Media & Music</h2>
+            </div>
+            
+            <div class="accounts-grid">
+                {% for link in social_links %}
+                <div class="account-card {{ link.color_class }}">
+                    <div class="account-icon">
+                        <i class="{{ link.icon_class }}"></i>
+                    </div>
+                    <h3>{{ link.platform }}</h3>
+                    <ul class="account-links">
+                        {% for song in song_links if song.platform == link.platform.lower() %}
+                        <li><a href="{{ song.url }}" target="_blank"><i class="fas fa-play-circle song-icon"></i> {{ song.title }}</a></li>
+                        {% endfor %}
+                        {% if not song_links|selectattr('platform', 'equalto', link.platform.lower())|list %}
+                        <li><a href="{{ link.url }}" target="_blank"><i class="fas fa-external-link-alt"></i> {{ link.platform }}</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-lang-en="Contact & Booking" data-lang-fr="Contact & Réservation">Contact & Booking</h2>
+            </div>
+            
+            <div class="contact-form">
+                <form id="booking-form" action="{{ url_for('submit_booking') }}" method="POST">
+                    <div class="form-group">
+                        <label for="name" data-lang-en="Full Name" data-lang-fr="Nom Complet">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" data-lang-en="Email Address" data-lang-fr="Adresse Email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" data-lang-en="Phone Number" data-lang-fr="Numéro de Téléphone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="event-type" data-lang-en="Type of Event" data-lang-fr="Type d'Événement">Type of Event</label>
+                        <select id="event-type" name="event_type" required>
+                            <option value="" data-lang-en="Select an option" data-lang-fr="Sélectionnez une option">Select an option</option>
+                            <option value="concert" data-lang-en="Concert" data-lang-fr="Concert">Concert</option>
+                            <option value="church-service" data-lang-en="Church Service" data-lang-fr="Culte d'Église">Church Service</option>
+                            <option value="conference" data-lang-en="Conference" data-lang-fr="Conférence">Conference</option>
+                            <option value="wedding" data-lang-en="Wedding" data-lang-fr="Mariage">Wedding</option>
+                            <option value="other" data-lang-en="Other" data-lang-fr="Autre">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" data-lang-en="Message" data-lang-fr="Message">Message</label>
+                        <textarea id="message" name="message" rows="5" data-lang-en="Tell us about your event and how Thenella can minister..." data-lang-fr="Parlez-nous de votre événement et comment Thenella peut exercer son ministère...">Tell us about your event and how Thenella can minister...</textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn" data-lang-en="Send Booking Request" data-lang-fr="Envoyer la Demande de Réservation">Send Booking Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3 data-lang-en="THENELLA Ministries" data-lang-fr="Ministères THENELLA">THENELLA Ministries</h3>
+                    <p data-lang-en="Spreading the gospel through music, worship, and evangelism. Based in Douala, Cameroon." data-lang-fr="Diffuser l'évangile par la musique, la louange et l'évangélisation. Basé à Douala, Cameroun.">Spreading the gospel through music, worship, and evangelism. Based in Douala, Cameroon.</p>
+                    <div class="social-icons">
+                        {% for link in social_links %}
+                        <a href="{{ link.url }}" target="_blank"><i class="{{ link.icon_class }}"></i></a>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 data-lang-en="Quick Links" data-lang-fr="Liens Rapides">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" data-lang-en="Home" data-lang-fr="Accueil">Home</a></li>
+                        <li><a href="#biography" data-lang-en="Biography" data-lang-fr="Biographie">Biography</a></li>
+                        <li><a href="#music" data-lang-en="Music" data-lang-fr="Musique">Music</a></li>
+                        <li><a href="#contact" data-lang-en="Contact" data-lang-fr="Contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 data-lang-en="Contact Info" data-lang-fr="Informations de Contact">Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-lang-en="Douala, Cameroon" data-lang-fr="Douala, Cameroun">Douala, Cameroon</span></li>
+                        <li><i class="fas fa-envelope"></i> contact@thenellaministries.com</li>
+                        <li><i class="fas fa-phone"></i> +237 XXX XXX XXX</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p data-lang-en="&copy; 2025 THENELLA Ministries. All rights reserved. | Designed with ❤️ for gospel music lovers" data-lang-fr="&copy; 2025 Ministères THENELLA. Tous droits réservés. | Conçu avec ❤️ pour les amateurs de musique gospel">&copy; 2025 THENELLA Ministries. All rights reserved. | Designed with ❤️ for gospel music lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
